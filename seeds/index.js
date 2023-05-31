@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const mongoose = require("mongoose");
 const cities = require("./cities");
 const Campground = require("../models/campground");
@@ -27,7 +31,7 @@ const seedDb = async () => {
       user: "6474f16ae509e6316dec9228",
       images: [
         {
-          url: "https://res.cloudinary.com/dtbo5j2iu/image/upload/v1685458319/YelpCampRevised/jrrtnoqfimhyuu96bwqm.jpg",
+          url: `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/v1685458319/YelpCampRevised/jrrtnoqfimhyuu96bwqm.jpg`,
           filename: "YelpCampRevised/jrrtnoqfimhyuu96bwqm",
         },
       ],

@@ -21,7 +21,8 @@ const helmet = require("helmet");
 const campgroundsRoutes = require("./routes/campgrounds");
 const reviewsRoutes = require("./routes/reviews");
 const usersRoutes = require("./routes/users");
-const dbURL = "mongodb://127.0.0.1:27017/yelp-camp-practice";
+const dbURL =
+  process.env.MONGO_ATLAS || "mongodb://127.0.0.1:27017/yelp-camp-practice";
 
 mongoose.connect(dbURL);
 
@@ -42,7 +43,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
 app.use(mongoSanitize());
 
-const secret = "thisisnotaproductionsecret";
+const secret = process.env.SECRET || "thisisnotaproductionsecret";
 
 const store = MongoStore.create({
   mongoUrl: dbURL,
@@ -112,7 +113,7 @@ app.use(
         "'self'",
         "blob:",
         "data:",
-        "https://res.cloudinary.com/dtbo5j2iu/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
+        `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/`, //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
         "https://images.unsplash.com/",
       ],
       fontSrc: ["'self'", ...fontSrcUrls],
@@ -155,6 +156,8 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error", { err });
 });
 
-app.listen(3000, () => {
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
   console.log("Serving on port 3000");
 });
