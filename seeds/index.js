@@ -30,7 +30,7 @@ const seedDb = async () => {
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae illo pariatur hic perferendis suscipit sit ut, eum maxime quis, id debitis amet dolore, sapiente tenetur consequatur repellendus sunt voluptatum!",
       price: Math.floor(Math.random() * 20) + 10,
-      user: "6474f16ae509e6316dec9228",
+      user: "6477d429a40ef1c1efe22640",
       images: [
         {
           url: `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/v1685458319/YelpCampRevised/jrrtnoqfimhyuu96bwqm.jpg`,
